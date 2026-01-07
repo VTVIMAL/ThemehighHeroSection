@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkout Hero</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Poppins Font from Google Fonts [web:4] -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        /* Rest of your styles remain exactly the same */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 15px;
+            justify-content: center;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #6e3df0, #f54581, #ff7a3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-badge-list i {
+            color: #7c3aed;
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+
+        .hero-card-wrapper {
+            max-width: 536px;
+            margin-left: auto;
+        }
+
+        .pricing-card-body {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 32px 28px;
+            box-shadow: 0 22px 80px rgba(15, 23, 42, 0.12);
+            position: relative;
+            height: 100%;
+        }
+
+        .pricing-card {
+            /* content: ""; */
+            /* position: absolute; */
+            /* inset: -30px; */
+            /* border-radius: 30px; */
+            /* background: linear-gradient(135deg, #f97316, #6366f1, #ec4899); */
+            background: linear-gradient(315deg, #F5D4C6 15%, #B3B5E9 42%, #E2B6D7 100%);
+            /* background-image: linear-gradient(to right top, #b3b5e9, #d1b6e2, #e5b9d7, #f1bfce, #f6c7c7, #f6c8c6, #f6cac6, #f6cbc5, #6366f1, #6366f1, #6366f1, #6366f1); */
+            /* background-image: linear-gradient(to right bottom, #e2b6d7, #dcb5db, #d4b5df, #ccb5e3, #c2b5e6, #cab5e4, #d1b5e1, #d8b6de, #eabad4, #f3c1cb, #f6cac6, #f5d4c6); */
+            backdrop-filter: blur(204px);
+            opacity: 0.8;
+            z-index: -1;
+            width: 509px;
+            height: 641px;
+            padding: 30px;
+            border-radius: 30px;
+        }
+
+        .option-box {
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+        }
+
+        .option-box.active {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+            position: relative;
+        }
+
+        .option-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .radio-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 2px solid #d1d5db;
+            position: relative;
+        }
+
+        .option-box.active .radio-dot {
+            border-color: #7c3aed;
+        }
+
+        .option-box.active .radio-dot::after {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: inherit;
+            background: #7c3aed;
+        }
+
+        .option-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            /* Keeps label flow intact */
+            padding-right: 80px;
+        }
+
+        .option-price {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .option-price span {
+            color: #6b7280;
+            font-size: 0.85rem;
+        }
+
+        .small-info {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .badge-pill {
+            position: absolute;
+            top: -25px;
+            /* Pulls above top border; adjust px to match image exactly */
+            right: -155px;
+            /* Aligns to right border; adjust for padding/border */
+            margin-left: 0;
+            /* Remove inline margin since absolutely positioned */
+            z-index: 1;
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            background: #fef3c7;
+            color: #92400e;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .badge-pill.green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .purchase-btn {
+            border-radius: 999px;
+            background: #facc15;
+            border: none;
+            width: 100%;
+            padding: 14px 0;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 12px;
+            margin-bottom: 18px;
+        }
+
+        .refund-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #4b5563;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        .refund-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #4f46e5;
+            color: #fff;
+            font-size: 0.7rem;
+        }
+
+        .hero-cta-btn {
+            border-radius: 999px;
+            padding-inline: 28px;
+            padding-block: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .hero-cta-btn-outline {
+            border-radius: 999px;
+            padding-inline: 28px;
+            padding-block: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-section {
+                padding-top: 40px;
+            }
+
+            .hero-card-wrapper {
+                margin: 40px auto 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Rest of the HTML body content remains identical -->
+    <section class="hero-section container">
+        <div class="row align-items-center g-4">
+            <!-- Left text -->
+            <div class="col-lg-7">
+                <div class="hero-title">
+                    <h1 class="display-5 fw-bold mb-3">
+                        Customize<br />
+                        Smart & <span class="gradient-text">Purchase-Ready</span><br />
+                    </h1>
+                    <h1 class="fw-normal">
+                        WooCommerce Checkout Pages!
+                    </h1>
+                </div>
+                <p class="mb-4 text-muted" style="max-width: 480px;">
+                    The best WooCommerce Checkout Manager – easily customize checkout fields on your WooCommerce
+                    checkout page.
+                </p>
+
+                <div class="hero-badge-list mb-4">
+                    <div class="d-flex align-items-center mb-1">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>24 Custom Checkout Fields</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Custom Sections</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Block Compatibility</span>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3">
+                    <button class="btn btn-primary hero-cta-btn" style="background:#4c1d95;border-color:#4c1d95;">
+                        ● Try Demo
+                    </button>
+                    <button class="btn btn-outline-secondary hero-cta-btn-outline">
+                        ● Documentation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right pricing card -->
+            <div class="col-lg-5">
+                <div class="hero-card-wrapper">
+                    <div class="pricing-card">
+                        <div class="pricing-card-body">
+                            <h5 class="fw-bold mb-2 mt-4 text-center">Subscription Options</h5>
+                            <p class="small-info text-center mb-3">
+                                A subscription entitles you to 1 year of updates and support from the date of purchase.
+                                <a href="#" class="text-decoration-underline small-info">License details</a>
+                            </p>
+
+                            <!-- Option 1 -->
+                            <div class="option-box">
+                                <div class="option-left">
+                                    <div class="radio-dot"></div>
+                                    <div>
+                                        <div class="option-label">Single Site</div>
+                                    </div>
+                                </div>
+                                <div class="option-price">
+                                    $39.00 <span>/year</span>
+                                </div>
+                            </div>
+
+                            <!-- Option 2 (active) -->
+                            <div class="option-box active">
+                                <div class="option-left">
+                                    <div class="radio-dot"></div>
+                                    <div>
+                                        <div class="option-label">
+                                            Up to 5 Sites
+                                            <span class="badge-pill">
+                                                🔥 Most purchased
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option-price">
+                                    $69.00 <span>/year</span>
+                                </div>
+                            </div>
+
+                            <!-- Option 3 -->
+                            <div class="option-box">
+                                <div class="option-left">
+                                    <div class="radio-dot"></div>
+                                    <div>
+                                        <div class="option-label">
+                                            Up to 25 Sites
+                                            <span class="badge-pill green">
+                                                💰 Best Value
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option-price">
+                                    $129.00 <span>/year</span>
+                                </div>
+                            </div>
+
+                            <button class="purchase-btn">
+                                Purchase
+                            </button>
+
+                            <div class="d-flex justify-content-center">
+                                <span class="refund-note">
+                                    <span class="refund-icon">$</span>
+                                    <span>30-Days No Questions Asked Refund</span>
+                                </span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons (for check icon) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+</body>
+
+</html>
